@@ -12,7 +12,7 @@ const StyledCube = styled.div`
   .face {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    border: calc(0.4vmin) solid #000;
+    border: calc(0.6vmin) solid #000;
     box-sizing: inherit;
     color: #fff;
     display: flex;
