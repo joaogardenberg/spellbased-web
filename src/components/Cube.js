@@ -32,8 +32,8 @@ const StyledCube = styled.div`
     }
     &.back {
       /* Mirrored on purpose */
-      transform: translateZ(-25vmin);
-      /* transform: rotateY(180deg) translateZ(25vmin); */
+      /* transform: translateZ(-25vmin); */
+      transform: rotateY(180deg) translateZ(25vmin);
     }
     &.left {
       transform: rotateY(-90deg) translateZ(25vmin);
