@@ -53,7 +53,7 @@ const StyledCube = styled.div`
 const faces = [
   {
     position: 'front',
-    background: 'rgba(51, 169, 82, 0.95)',
+    background: 'rgb(51, 169, 82)',
     content: 'Spellbased'
   },
   {
