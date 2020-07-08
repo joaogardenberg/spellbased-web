@@ -93,8 +93,8 @@ export default function Cube() {
     if (isMobile) {
       event = 'deviceorientation'
 
-      callback = (e) => {
-        console.warn(e)
+      callback = ({ alpha, beta, gamma }) => {
+        setAngles({ x: beta, y: -gamma, z: alpha })
       }
     } else {
       event = 'mousemove'
@@ -102,7 +102,8 @@ export default function Cube() {
       callback = ({ view: { innerWidth, innerHeight }, clientX, clientY }) => {
         setAngles({
           x: (0.5 - clientY / innerHeight) * 90,
-          y: -(0.5 - clientX / innerWidth) * 90
+          y: -(0.5 - clientX / innerWidth) * 90,
+          z: null
         })
       }
     }
@@ -116,7 +117,13 @@ export default function Cube() {
       className="cube"
       style={
         angles
-          ? { transform: `rotateX(${angles.x}deg) rotateY(${angles.y}deg)` }
+          ? {
+              transform: classNames({
+                [`rotateX(${angles.x}deg)`]: angles.x,
+                [`rotateY(${angles.y}deg)`]: angles.y,
+                [`rotateZ(${angles.z}deg)`]: angles.z
+              })
+            }
           : {}
       }
     >
