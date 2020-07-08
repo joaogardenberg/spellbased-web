@@ -8,6 +8,7 @@ const StyledCube = styled.div`
   height: 50vmin;
   perspective: 400vmin;
   transform-style: preserve-3d;
+  user-select: none;
   width: 50vmin;
   .face {
     align-items: center;
