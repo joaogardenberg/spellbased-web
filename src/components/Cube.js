@@ -82,33 +82,42 @@ const faces = [
 ]
 
 export default function Cube() {
-  const [angles, setAngles] = useState(null)
+  const [angle, setAngle] = useState(180)
+  const [angles, setAngles] = useState({ x: null, y: null })
 
   useEffect(() => {
-    let event
-    let callback
-
-    if (isMobile) {
-      event = 'deviceorientation'
-
-      callback = ({ alpha, beta, gamma }) => {
-        setAngles({ x: beta, y: -gamma, z: alpha })
-      }
-    } else {
-      event = 'mousemove'
-
-      callback = ({ view: { innerWidth, innerHeight }, clientX, clientY }) => {
+    if (!isMobile) {
+      const onMouseMove = ({
+        view: { innerWidth, innerHeight },
+        clientX,
+        clientY
+      }) => {
         setAngles({
           x: (0.5 - clientY / innerHeight) * 90,
-          y: -(0.5 - clientX / innerWidth) * 90,
-          z: null
+          y: -(0.5 - clientX / innerWidth) * 90
         })
       }
-    }
 
-    window.addEventListener(event, callback)
-    return () => window.removeEventListener(event, callback)
+      window.addEventListener('mousemove', onMouseMove)
+      return () => window.removeEventListener('mousemove', onMouseMove)
+    }
   }, [])
+
+  useEffect(() => {
+    if (isMobile) {
+      const timeout = setTimeout(() => {
+        let newAngle = angle - 0.01
+
+        if (newAngle <= 0) {
+          newAngle = 360
+        }
+
+        setAngle(newAngle)
+        setAngles({ x: 40 * Math.sin(newAngle), y: 40 * Math.cos(newAngle) })
+      }, 10)
+      return () => clearTimeout(timeout)
+    }
+  }, [angle])
 
   return (
     <StyledCube
@@ -118,8 +127,7 @@ export default function Cube() {
           ? {
               transform: classNames({
                 [`rotateX(${angles.x}deg)`]: angles.x,
-                [`rotateY(${angles.y}deg)`]: angles.y,
-                [`rotateZ(${angles.z}deg)`]: angles.z
+                [`rotateY(${angles.y}deg)`]: angles.y
               })
             }
           : {}
