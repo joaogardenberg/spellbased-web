@@ -13,6 +13,9 @@ const StyledCube = styled.div`
   .face {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
+    background-image: url('/images/cube_texture.png');
+    background-position: center center;
+    background-size: cover;
     border: calc(0.6vmin) solid #000;
     box-sizing: inherit;
     color: #fff;
