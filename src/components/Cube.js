@@ -16,7 +16,9 @@ const StyledCube = styled.div`
     background-image: url('/images/cube_texture.png');
     background-position: center center;
     background-size: cover;
-    border: calc(0.6vmin) solid #000;
+    border: calc(2vmin) solid #000;
+    border-image: url('/images/border_texture.jpg') 10% round;
+    box-shadow: 0 0 0 2px #2b150e inset;
     box-sizing: inherit;
     color: #fff;
     display: flex;
